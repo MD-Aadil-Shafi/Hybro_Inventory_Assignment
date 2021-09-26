@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Reports
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="fw-light">Reports :</h1>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Warehouse</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% if reports %}
+                {% for report in reports %}
+
+                <tr>
+
+                    <td>{{report.product_id}}</td>
+                    <td>{% if report.from_location == None %}{% else %} {{report.from_location}} {% endif %} - To - 
+                      {% if report.to_location == None %}{% else %} {{report.to_location}} {% endif %}</td>
+                    <td>{{report.qty}}</td>
+                    
+
+                  </tr>
+
+                {% endfor %}
+                {% endif %}
+
+        
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+
+{% endblock content %}

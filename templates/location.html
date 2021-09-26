@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+Location
+{% endblock title %}
+
+
+{% block content %}
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        
+            {% if locations %}
+            <h1 class="fw-light pb-2">Locations &nbsp; &nbsp; <a class="btn btn-info text-white" href="{% url 'location_create_view' %}">Add New</a></h1>
+            {% for location in locations %}
+
+            <h6 class="fw-light"><a class="nav-link text-dark" href="{% url 'location_update_view' location.pk %}">{{location}}</a></h6>
+            <hr>
+
+            {% endfor %}
+            {% endif %} 
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

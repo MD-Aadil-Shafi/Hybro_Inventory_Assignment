@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Movement
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="fw-light">Product Movement &nbsp; &nbsp; <a class="btn btn-info text-white" href="{% url 'movement_create_view' %}">Add New</a></h1>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Movement ID</th>
+                <th scope="col">Time</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Product Id</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% if movements %}
+                {% for move in movements %}
+
+                <tr>
+                    <th scope="row">{{move.movement_id}}</th>
+                    <td>{{move.timestamp}}</td>
+
+                    <td>{% if move.from_location == None %}{% else %} {{move.from_location}} {% endif %}</td>
+                    <td>{% if move.to_location == None %}{% else %} {{move.to_location}} {% endif %}</td>
+
+                    <td>{{move.product_id}}</td>
+                    <td>{{move.qty}}</td>
+                    <td><a href="{% url 'movement_update_view' move.pk %}" class="badge bg-warning shadow rounded text-dark nav-link">Edit</a> </td>
+                    <td><a href="{% url 'movement_to_view' move.pk %}" class="badge bg-secondary shadow rounded nav-link">Move To</a> </td>
+                    <td><a href="{% url 'movement_out_view' move.pk %}" class="badge bg-danger shadow rounded nav-link">Move Out</a> </td>
+
+                  </tr>
+
+                {% endfor %}
+                {% endif %}
+
+        
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+
+{% endblock content %}
